@@ -29,7 +29,7 @@ namespace TodoAppExercise.Pages
 
         public async Task OnGetAsync()
         {
-            myTodoItems = await _context.TodoItems.ToListAsync();
+            myTodoItems = await _context.TodoItems.Where(x => x.Deleted == false).ToListAsync();
         }
 
         public async Task<IActionResult> OnPostAddItem(string itemName)
@@ -37,7 +37,7 @@ namespace TodoAppExercise.Pages
             TodoItem newItem = new TodoItem {ItemName = itemName, Toggled = false, Deleted = false, DateTimeCreated = DateTime.Now } ;
             _context.TodoItems.Add(newItem);
             await _context.SaveChangesAsync();
-            myTodoItems = await _context.TodoItems.ToListAsync();
+            myTodoItems = await _context.TodoItems.Where(x => x.Deleted == false).ToListAsync();
             return Page();
         }
 
@@ -51,7 +51,7 @@ namespace TodoAppExercise.Pages
                 await _context.SaveChangesAsync();
             }
             
-            myTodoItems = await _context.TodoItems.ToListAsync();
+            myTodoItems = await _context.TodoItems.Where(x => x.Deleted == false).ToListAsync();
             return Page();
         }
 
@@ -65,7 +65,7 @@ namespace TodoAppExercise.Pages
                 await _context.SaveChangesAsync();
             }
 
-            myTodoItems = await _context.TodoItems.ToListAsync();
+            myTodoItems = await _context.TodoItems.Where(x => x.Deleted == false).ToListAsync();
             return Page();
         }
 

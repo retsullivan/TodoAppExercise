@@ -20,7 +20,7 @@
             @foreach (var item in Model.myTodoItems)
             {
             <div class="todo-table-row">
-                <p class="item-name col-8">@item.ItemName</p>
+                <p class="item-name col-8 @("toggle-" + (item.Toggled ==true ? "true" : "false"))" >@item.ItemName</p>
                 <form class="form col-2" method="post">
                     <input name="itemId" type="hidden" value="@item.ID">
                     <input type="submit" value="toggle" asp-page-handler="toggle" />
