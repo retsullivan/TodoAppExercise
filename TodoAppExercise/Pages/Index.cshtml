@@ -1,0 +1,38 @@
+﻿@page
+@model TodoAppExercise.Pages.IndexModel
+@{
+    ViewData["Title"] = "Todo";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">My Todo List</h1>
+        <form class="form" method="post">
+            <input type="text" name="itemName" placeholder="Your todo..." />
+            <input type="submit" value="Save" asp-page-handler="AddItem"> 
+            <br />
+
+            @*<input type="text" value="AddItem" id="addItem" name="addItem" placeholder="Your todo..." asp-page-handler="AddItem">
+            <button type="button" onclick="alert('item added')">Save</button> <br>*@
+        </form>
+
+        <div class="todo-table">
+            @foreach (var item in Model.myTodoItems)
+            {
+            <div class="todo-table-row">
+                <p class="item-name col-8">@item.ItemName</p>
+                <form class="form col-2" method="post">
+                    <input name="itemId" type="hidden" value="@item.ID">
+                    <input type="submit" value="toggle" asp-page-handler="toggle" />
+                </form>
+                <form class="form col-2" method="post">
+                    <input name="itemId" type="hidden" value="@item.ID">
+                    <input type="submit" value="delete" asp-page-handler="delete" />
+                </form>
+            </div>
+            }
+        </div>
+
+    </div>
+
+</div>
